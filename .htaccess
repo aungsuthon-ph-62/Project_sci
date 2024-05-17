@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteBase /Project_sci/
+
+# Redirect root requests to public/index.php
+RewriteRule ^$ public/index.php [L]
+
+# Redirect requests for /index to public/index.php
+RewriteRule ^index$ public/index.php [L]
+
+# Redirect requests for /index to public/index.php
+RewriteRule ^404$ private/app/views/404.php [L]
+
+# Redirect requests for /login to public/login.php
+RewriteRule ^login$ public/login.php [L]
+
+# Redirect requests for /register to public/register.php
+RewriteRule ^register$ public/register.php [L]
+
+RewriteRule ^forgot$ public/forgot_password.php [L]
+
+# Remove .php extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Remove .html extension from URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# Redirect all other requests to the index.php file in the public folder
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php?url=$1 [L,QSA]
+
+
